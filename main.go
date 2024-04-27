@@ -17,8 +17,8 @@ func main() {
 }
 
 func maxProfit(trx int, prices []int) int {
-	maxCosts := make([]int, len(prices))
-	maxCosts[0] = prices[0]
+	minCosts := make([]int, len(prices))
+	minCosts[0] = prices[0]
 	maxProfits := make([]int, len(prices))
 	currTrx := 1
 	res := 0
@@ -30,9 +30,9 @@ func maxProfit(trx int, prices []int) int {
 	for i := 0; i < trx; i++ {
 		for j := 1; j < len(prices); j++ {
 			tempCost := prices[j] - maxProfits[j]
-			maxCosts[j] = min(maxCosts[j-1], tempCost)
+			minCosts[j] = min(minCosts[j-1], tempCost)
 
-			tempProfit := prices[j] - maxCosts[j]
+			tempProfit := prices[j] - minCosts[j]
 			maxProfits[j] = max(maxProfits[j-1], tempProfit)
 		}
 
